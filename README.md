@@ -1,4 +1,4 @@
-# pun_idgun
+# pun_idgun but it automatically copies the position of the object to the clipboard
 
 
 
@@ -18,3 +18,5 @@ I've looked at the functionality of multiple resources so without them I would n
 • object delete gun (For the aiming gun at object lines)
 
 • SimpleCarHUD (For some text-elements and design)
+
+• bl_coords (For copying to the clipboard)
