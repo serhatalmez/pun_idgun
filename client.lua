@@ -4,11 +4,6 @@ local coordsText = ""   -- Removes any text the coords had stored.
 local headingText = ""  -- Removes any text the heading had stored.
 local modelText = ""    -- Removes any text the model had stored.
 
-
-function set_clipboard(text)
-    io.popen('pbcopy','w'):write(text):close()
-end
-
 -- Thread that makes everything happen.
 Citizen.CreateThread(function()                             -- Create the thread.
     while true do                                           -- Loop it infinitely.
