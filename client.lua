@@ -5,11 +5,14 @@ local headingText = ""  -- Removes any text the heading had stored.
 local modelText = ""    -- Removes any text the model had stored.
 
 
+function set_clipboard(text)
+    io.popen('pbcopy','w'):write(text):close()
+end
 
 -- Thread that makes everything happen.
 Citizen.CreateThread(function()                             -- Create the thread.
     while true do                                           -- Loop it infinitely.
-        local pause = 250                                   -- If infos are off, set loop to every 250ms. Eats less resources.
+        local pause = 1000                                   -- If infos are off, set loop to every 250ms. Eats less resources.
         if infoOn then                                      -- If the info is on then...
             pause = 5                                       -- Only loop every 5ms (equivalent of 200fps).
             local player = GetPlayerPed(-1)                 -- Get the player.
@@ -23,6 +26,10 @@ Citizen.CreateThread(function()                             -- Create the thread
                 modelText = model                           -- Set the modelText local.
             end                                             -- End (player is not freeaiming: stop updating texts).
             DrawInfos("Coordinates: " .. coordsText .. "\nHeading: " .. headingText .. "\nHash: " .. modelText)     -- Draw the text on screen
+            SendNUIMessage({
+                type = 'clipboard',
+                data = '' .. coordsText, 
+            })
         end                                                 -- Info is off, don't need to do anything.
         Citizen.Wait(pause)                                 -- Now wait the specified time.
     end                                                     -- End (stop looping).
